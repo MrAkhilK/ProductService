@@ -21,4 +21,9 @@ public class fakeStoreClient {
         String fakeStoreURL= "https://fakestoreapi.com/products/"+ id;
         return restTemplate.getForObject(fakeStoreURL,FakeStoreDTO.class);
     }
+
+    public FakeStoreDTO postProduct(FakeStoreDTO input){
+        String fakeStoreURL="https://fakestoreapi.com/products";
+        return restTemplate.postForObject(fakeStoreURL,input,FakeStoreDTO.class);
+    }
 }
