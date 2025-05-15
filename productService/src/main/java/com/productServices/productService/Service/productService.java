@@ -22,4 +22,12 @@ public class productService {
     public FakeStoreDTO createProduct(FakeStoreDTO input){
         return  fakestoreclient.postProduct(input);
     }
+
+    public FakeStoreDTO updateProductService(int id, FakeStoreDTO input){
+        return fakestoreclient.updateProduct(id, input);
+    }
+
+    public String deleteProductService(int id){
+        return fakestoreclient.deleteProduct(id);
+    }
 }

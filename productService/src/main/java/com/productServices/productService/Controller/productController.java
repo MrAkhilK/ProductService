@@ -26,4 +26,14 @@ public class productController {
         return productservice.createProduct(input);
     }
 
+    @PutMapping("/products/{id}")
+    public FakeStoreDTO updateProduct(@PathVariable("id") int id, @RequestBody FakeStoreDTO input){
+        return productservice.updateProductService(id, input);
+    }
+
+    @DeleteMapping("/products/{id}")
+    public String deleteProduct(@PathVariable("id") int id){
+        return productservice.deleteProductService(id);
+    }
+
 }
