@@ -3,6 +3,9 @@ package com.productServices.productService.Controller;
 import com.productServices.productService.Service.productService;
 import com.productServices.productService.dto.FakeStoreDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,7 +21,11 @@ public class productController {
 
     @GetMapping("/products/{id}")
     public FakeStoreDTO getProductID(@PathVariable("id") int id){
-        return productservice.getProductId(id);
+        if(id<=0){
+            throw new IllegalArgumentException("Product doesn't exit");
+        }else{
+            return productservice.getProductId(id);
+        }
     }
 
     @PostMapping("/products")
@@ -34,6 +41,10 @@ public class productController {
     @DeleteMapping("/products/{id}")
     public String deleteProduct(@PathVariable("id") int id){
         return productservice.deleteProductService(id);
+    }
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleException(Exception exception){
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
 }
